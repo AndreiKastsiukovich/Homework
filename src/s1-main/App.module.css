@@ -3,9 +3,22 @@
 }
 
 .hw {
-
+    width: 1280px;
+    height: 373px;
+    left: 0px;
+    top: 131px;
 }
 
 .hwTitle {
+    width: 165px;
+    height: 27px;
+    left: 70px;
+    top: 131px;
 
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+
+    color: #000000;
 }
