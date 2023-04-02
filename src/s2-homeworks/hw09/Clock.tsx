@@ -10,7 +10,7 @@ function Clock() {
     const [show, setShow] = useState<boolean>(false)
 
     const [disableStart,setDisableStart] = useState(false)
-    const [disableStop,setDisableStop] = useState(false)
+    const [disableStop,setDisableStop] = useState(true)
 
     const start = () => {
         // пишут студенты // запустить часы (должно отображаться реальное время, а не +1)
