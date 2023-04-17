@@ -17,11 +17,10 @@ function HW11() {
     const [value2, setValue2] = useState(restoreState<number[]>('hw11-value2', [0,100]))
 
     const change = (event: Event, value: number | number[]) => {
-        
+        console.log(value)
         if(Array.isArray(value)){
             saveState('hw11-value1', value[0])
             setValue1(value[0])
-
             setValue2(value)
         } else{
             saveState('hw11-value1',value)
