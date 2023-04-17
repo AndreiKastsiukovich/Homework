@@ -18,13 +18,16 @@ function HW11() {
 
     const change = (event: Event, value: number | number[]) => {
 
-        console.log(value)
-
         if(Array.isArray(value)){
+            saveState('hw11-value1', value[0])
             setValue1(value[0])
+
             setValue2(value)
         } else{
+            saveState('hw11-value1', value)
             setValue1(value)
+
+            saveState('hw11-value2', [value, value2[1]])
             setValue2([value,value2[1]])
         }
         // пишет студент // если пришёл массив - сохранить значения в оба useState, иначе в первый
