@@ -37,9 +37,25 @@ const HW13 = () => {
                 setCode('Код 200!')
                 setImage(success200)
                 // дописать
+                setInfo('')
 
             })
             .catch((e) => {
+                if(e.code === 'ERR_BAD_RESPONSE'){
+                    setCode('Код 400!')
+                    setImage(error400)
+                    setInfo('')
+                }
+                else if(e.code === 'ERR_BAD_REQUEST'){
+                    setCode('Код 500!')
+                    setImage(error500)
+                    setInfo('')
+                }
+                else if(e.code === 'ERR_NETWORK'){
+                    setCode('Unknown')
+                    setImage(errorUnknown)
+                    setInfo('')
+                }
                 // дописать
 
             })
