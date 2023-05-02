@@ -31,37 +31,63 @@ const HW13 = () => {
         setText('')
         setInfo('...loading')
 
+    //     axios
+    //         .post(url, {success: x})
+    //
+    //         .then((res) => {
+    //             setCode('Код 200!')
+    //             setImage(success200)
+    //             // дописать
+    //             setText(res.data.errorText)
+    //             setInfo(res.data.info)
+    //         })
+    //
+    //         .catch((e) => {
+    //             console.log(e)
+    //             if (e.code === 'ERR_BAD_REQUEST') {
+    //                 setCode('Код 400!')
+    //                 setImage(error400)
+    //                 setText(e.response.data.errorText)
+    //                 setInfo(e.response.data.info)
+    //             } else if (e.code === 'ERR_BAD_RESPONSE') {
+    //                 setCode('Код 500!')
+    //                 setImage(error500)
+    //                 setText(e.response.data.errorText)
+    //                 setInfo(e.response.data.info)
+    //             } else {
+    //                 setCode('Error')
+    //                 setImage(errorUnknown)
+    //                 setText(e.message)
+    //                 setInfo(e.name)
+    //             }
+    //             // дописать
+    //
+    //         })
+    // }
         axios
             .post(url, {success: x})
-
             .then((res) => {
-                setCode('Код 200!')
+                setCode(`Код ${res.status}!`)
                 setImage(success200)
                 // дописать
-                setText(res.data.errorText)
                 setInfo(res.data.info)
+                setText(res.data.errorText)
             })
-
             .catch((e) => {
-                console.log(e)
-                if (e.code === 'ERR_BAD_REQUEST') {
-                    setCode('Код 400!')
-                    setImage(error400)
-                    setText(e.response.data.errorText)
-                    setInfo(e.response.data.info)
-                } else if (e.code === 'ERR_BAD_RESPONSE') {
-                    setCode('Код 500!')
-                    setImage(error500)
-                    setText(e.response.data.errorText)
-                    setInfo(e.response.data.info)
-                } else {
-                    setCode('Error')
-                    setImage(errorUnknown)
-                    setText(e.message)
-                    setInfo(e.name)
-                }
                 // дописать
+                if (e.response.status) {
+                    setCode(`Ошибка ${e.response.status}!!`)
+                    setImage(e.response.status === 500 ? error500 : error400)
+                    setInfo(e.response.data.info)
+                    setText(e.response.data.errorText)
 
+                } else {
+                    // console.log(e.name, e.message)
+                    setImage(errorUnknown)
+                    setCode('Error')
+                    setInfo(e.name)
+                    setText(e.message)
+                }
             })
     }
 
@@ -84,7 +110,7 @@ const HW13 = () => {
                     </SuperButton>
                     <SuperButton
                         id={'hw13-send-false'}
-                        onClick={send(undefined)}
+                        onClick={send(false)}
                         xType={'secondary'}
                         disabled={info === '...loading'}
                         // дописать
@@ -94,7 +120,7 @@ const HW13 = () => {
                     </SuperButton>
                     <SuperButton
                         id={'hw13-send-undefined'}
-                        onClick={send(false)}
+                        onClick={send(undefined)}
                         xType={'secondary'}
                         disabled={info === '...loading'}
                         // дописать
