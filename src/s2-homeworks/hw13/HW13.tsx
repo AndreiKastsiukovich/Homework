@@ -44,23 +44,18 @@ const HW13 = () => {
             })
 
             .catch((e) => {
-                // if(e.response.status){
-                //     setCode('Код 500!')
-                //     setImage(error500)
-                //     setText(e.message)
-                //     setInfo(e.name)
-                // }
-                // else if(e.code === 'ERR_BAD_REQUEST'){
-                //     setCode('Код 400!')
-                //     setImage(error400)
-                //     setText(e.message)
-                //     setInfo(e.name)
-                // }
-                if (e.response.status) {
-                    setCode(`Ошибка ${e.response.status}!!`)
-                    setImage(e.response.status === 500 ? error500 : error400)
-                    setInfo(e.response.data.info)
-                    setText(e.response.data.errorText)}
+                if(e.code === 'ERR_BAD_REQUEST'){
+                    setCode('Код 500!')
+                    setImage(error500)
+                    setText(e.message)
+                    setInfo(e.name)
+                }
+                else if(e.code === 'ERR_BAD_RESPONSE'){
+                    setCode('Код 400!')
+                    setImage(error400)
+                    setText(e.message)
+                    setInfo(e.name)
+                }
                 else {
                     setCode('Error')
                     setImage(errorUnknown)
