@@ -7,7 +7,6 @@ import success200 from './images/200.svg'
 import error400 from './images/400.svg'
 import error500 from './images/500.svg'
 import errorUnknown from './images/error.svg'
-import {log} from "util";
 
 /*
 * 1 - дописать функцию send
@@ -44,19 +43,18 @@ const HW13 = () => {
             })
 
             .catch((e) => {
-                if(e.code === 'ERR_BAD_REQUEST'){
-                    setCode('Код 500!')
-                    setImage(error500)
-                    setText(e.message)
-                    setInfo(e.name)
-                }
-                else if(e.code === 'ERR_BAD_RESPONSE'){
+                console.log(e)
+                if (e.code === 'ERR_BAD_REQUEST') {
                     setCode('Код 400!')
                     setImage(error400)
-                    setText(e.message)
-                    setInfo(e.name)
-                }
-                else {
+                    setText(e.response.data.errorText)
+                    setInfo(e.response.data.info)
+                } else if (e.code === 'ERR_BAD_RESPONSE') {
+                    setCode('Код 500!')
+                    setImage(error500)
+                    setText(e.response.data.errorText)
+                    setInfo(e.response.data.info)
+                } else {
                     setCode('Error')
                     setImage(errorUnknown)
                     setText(e.message)
@@ -86,7 +84,7 @@ const HW13 = () => {
                     </SuperButton>
                     <SuperButton
                         id={'hw13-send-false'}
-                        onClick={send(false)}
+                        onClick={send(undefined)}
                         xType={'secondary'}
                         disabled={info === '...loading'}
                         // дописать
@@ -96,7 +94,7 @@ const HW13 = () => {
                     </SuperButton>
                     <SuperButton
                         id={'hw13-send-undefined'}
-                        onClick={send(undefined)}
+                        onClick={send(false)}
                         xType={'secondary'}
                         disabled={info === '...loading'}
                         // дописать
